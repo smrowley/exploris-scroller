@@ -1,0 +1,38 @@
+{
+  "name": "exploris-scroller",
+  "version": "0.0.1",
+  "description": "Platform scroller shooter",
+  "homepage": "https://github.com/smrowley/exploris-scroller",
+  "scripts": {
+    "clean": "read -p \"Are you sure you want to clean the project? [y/n] \" REPLY; if [[ $REPLY =~ ^[Yy]$ ]]; then rm -R .git .github demo-app test .codeclimate.yml .travis.yml jest.json wdio.BUILD.conf.js src/features/**; fi",
+    "local-webserver": "forever start -s ./node_modules/.bin/http-server ./demo-app -s",
+    "test": "npm run test:validate && npm run test:unit && npm run test:features",
+    "test:features": "npm run local-webserver & (wdio wdio.BUILD.conf.js; wdio_ret=$?; forever stopall; exit $wdio_ret)",
+    "test:unit": "jest --config=jest.json",
+    "test:validate": "eslint 'src/**/*.js' 'test/**/*.js!(setup.js)'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/smrowley/exploris-scroller.git"
+  },
+  "bugs": {
+    "url": "https://github.com/smrowley/exploris-scroller/issues"
+  },
+  "keywords": [
+    "scroller",
+    "shooter",
+    "platformer",
+    "phaser"
+  ],
+  "author": "Shane Rowley <shanemrowley@gmail.com>",
+  "contributors": [
+  ],
+  "license": "GPLv3",
+  "dependencies": {
+    "phaser": "3.15.1",
+  },
+  "devDependencies": {
+    "eslint": "~5.0.0",
+    "http-server": "~0.11.0"
+  }
+}
